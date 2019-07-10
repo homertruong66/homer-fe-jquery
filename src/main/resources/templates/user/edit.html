@@ -1,0 +1,44 @@
+<fieldset>
+    <legend>User Edit</legend>
+    <div id="user-form" action="#">
+        <div style="display: none">
+            <label style="width: 140px;">Id: </label><input class="field" name="id" type="text" />
+        </div>
+        <div>
+            <label style="width: 140px;">Email: </label><input class="field" name="email" type="text" />
+        </div>
+        <div>
+            <label style="width: 140px;" name="confirmedEmailLabel">Confirmed Email: </label><input class="field" name="confirmedEmail" type="text" />
+        </div>
+        <div>
+            <label style="width: 140px;">Password: </label><input class="field" name="password" type="password" />
+        </div>
+        <div>
+            <label style="width: 140px;" name="confirmedPasswordLabel">Confirmed Password: </label><input class="field" name="confirmedPassword" type="password" />
+        </div>
+        <div>
+            <label style="width: 140px;">Name: </label><input class="field" name="name" type="text" />
+        </div>
+        <div>
+            <label style="width: 140px;">Age: </label><input class="field" name="age" type="text" />
+        </div>
+        <div>
+            <label style="width: 140px;">Roles: </label>
+            <select name="roles" multiple="true">
+                <option>ROLE_USER</option>
+                <option>ROLE_ADMIN</option>
+            </select>
+        </div>
+        <div style="display: none">
+            <label style="width: 140px;">Version: </label><input class="field" name="version" type="text" />
+        </div>
+        <div>
+            <button style="margin-left: 20px; width: 100px;" data-action="save" >
+                Save
+            </button>
+            <button style="margin-left: 20px; width: 100px;" data-action="cancelEdit" >
+                Cancel
+            </button>
+        </div>
+    </div>
+</fieldset>

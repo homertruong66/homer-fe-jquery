@@ -1,0 +1,69 @@
+<!-- basic scripts -->
+<!--[if !IE]> -->
+<script src="jquery_ui_app/3rdparty/jquery-3.1.1.min.js"></script>
+<!-- <![endif]-->
+
+<!--[if IE]>
+<script src="AceMaster/assets/js/jquery.1.11.1.min.js"></script>
+<![endif]-->
+
+<!--[if IE]>
+<script type="text/javascript">
+    window.jQuery || document.write("<script src='assets/js/jquery1x.min.js'>"+"<"+"/script>");
+</script>
+<![endif]-->
+
+<script src="AceMaster/assets/js/bootstrap.min.js"></script>
+<script src="AceMaster/assets/js/jquery.jqGrid.js"></script>
+<!-- page specific plugin scripts -->
+
+<!--[if lte IE 8]>
+<script src="AceMaster/assets/js/excanvas.min.js"></script>
+<![endif]-->
+<script src="AceMaster/assets/js/jquery-ui.custom.min.js"></script>
+<script src="AceMaster/assets/js/jquery.ui.touch-punch.min.js"></script>
+<script src="AceMaster/assets/js/jquery.easypiechart.min.js"></script>
+<script src="AceMaster/assets/js/jquery.sparkline.min.js"></script>
+<script src="AceMaster/assets/js/jquery.flot.min.js"></script>
+<script src="AceMaster/assets/js/jquery.flot.pie.min.js"></script>
+<script src="AceMaster/assets/js/jquery.flot.resize.min.js"></script>
+
+<!-- ace scripts -->
+<script src="AceMaster/assets/js/ace-elements.min.js"></script>
+<script src="AceMaster/assets/js/ace.min.js"></script>
+
+
+<!--JS 3rdparty-->
+<script type="text/javascript" src="jquery_ui_app/3rdparty/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="jquery_ui_app/3rdparty/sammy-0.7.6.min.js"></script>
+
+<!--JS common-->
+<script type="text/javascript" src="jquery_ui_app/common/AppFramework.js"></script>
+<script type="text/javascript" src="jquery_ui_app/common/Constant.js"></script>
+<script type="text/javascript" src="jquery_ui_app/common/RequestManager.js"></script>
+<script type="text/javascript" src="jquery_ui_app/common/Util.js"></script>
+
+<!--JS app-->
+<div sec:authorize="hasRole('ADMIN')">
+    <script type="text/javascript" src="jquery_ui_app/model/User.js" />
+    <script type="text/javascript" src="jquery_ui_app/controller/UserController.js" />
+</div>
+<div sec:authorize="hasRole('USER')">
+    <script type="text/javascript" src="jquery_ui_app/model/University.js" />
+    <script type="text/javascript" src="jquery_ui_app/model/Department.js" />
+    <script type="text/javascript" src="jquery_ui_app/model/Course.js" />
+    <script type="text/javascript" src="jquery_ui_app/model/Student.js" />
+    <script type="text/javascript" src="jquery_ui_app/model/Teacher.js" />
+    <script type="text/javascript" src="jquery_ui_app/model/Clazz.js" />
+    <script type="text/javascript" src="jquery_ui_app/controller/UniversityController.js" />
+    <script type="text/javascript" src="jquery_ui_app/controller/DepartmentController.js" />
+    <script type="text/javascript" src="jquery_ui_app/controller/CourseController.js" />
+    <script type="text/javascript" src="jquery_ui_app/controller/StudentController.js" />
+    <script type="text/javascript" src="jquery_ui_app/controller/TeacherController.js" />
+    <script type="text/javascript" src="jquery_ui_app/controller/ClazzController.js" />
+</div>
+<div sec:authorize="hasAnyRole('STUDENT', 'TEACHER')">
+    <script type="text/javascript" src="jquery_ui_app/model/Clazz.js" />
+    <script type="text/javascript" src="jquery_ui_app/controller/ClazzController.js" />
+</div>
+<script type="text/javascript" src="jquery_ui_app/Starter.js"></script>

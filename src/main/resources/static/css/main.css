@@ -1,0 +1,59 @@
+#logo {
+    float: left;
+}
+
+#profile {
+    float: right;
+}
+
+#menu-left {
+    float: left;
+    border: 2px;
+    width: 200px;
+}
+
+#tab-pane {
+    margin-left: 200px;
+}
+
+#university-section, #department-section, #course-section, #teacher-section,
+#student-section, #clazz-section, #registration-section, #assigned-section {
+    display: none;
+}
+
+fieldset {
+    width: 98%;
+}
+
+legend {
+    font-weight: bold;
+    color: blue;
+}
+
+div, li {
+    margin: 5px;
+}
+
+label {
+    float: left;
+    width: 80px;
+    text-align: right;
+}
+
+input, select, textarea {
+    margin: 0 5px;
+    width: 200px;
+}
+
+.button {
+  cursor: pointer;
+  font: bold 11px Arial;
+  text-decoration: none;
+  background-color: #EEEEEE;
+  color: blue;
+  padding: 2px 6px 2px 6px;
+  border-top: 1px solid #CCCCCC;
+  border-right: 1px solid #333333;
+  border-bottom: 1px solid #333333;
+  border-left: 1px solid #CCCCCC;
+}

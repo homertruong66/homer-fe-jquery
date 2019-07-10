@@ -1,0 +1,7 @@
+server:
+  port: 9091
+  jetty:
+    queueSize: 50
+    minThreads: 10
+    maxThreads: 20
+    idleTimeout: 30000

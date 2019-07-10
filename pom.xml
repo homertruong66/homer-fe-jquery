@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+>
+    <!--  ====================================================================================================  -->
+    <!--                                                 PROJECT                                                -->
+    <!--  ====================================================================================================  -->
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.tech3s.frontend</groupId>
+    <artifactId>tech3s-frontend</artifactId>
+    <version>1.0.0</version>
+    <packaging>jar</packaging>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.4.1.RELEASE</version>
+    </parent>
+
+    <name>TECH3S Frontend Applications</name>
+    <description>TECH3S Frontend Applications</description>
+
+    <!--  ====================================================================================================  -->
+    <!--                                                PROPERTIES                                              -->
+    <!--  ====================================================================================================  -->
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+        <springboot.version>1.4.1.RELEASE</springboot.version>
+    </properties>
+
+    <!--  ====================================================================================================  -->
+    <!--                                              DEPENDENCIES                                              -->
+    <!--  ====================================================================================================  -->
+
+    <dependencies>
+        <!-- Web Server -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <!--spring-boot-starter, spring-boot-starter-tomcat, jackson-databind, spring-web, spring-webmvc-->
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-tomcat</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jetty</artifactId>
+            <!-- jetty-webapp, jetty-jsp-->
+        </dependency>
+
+
+        <!--Presentation-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+            <!--spring-boot-starter, spring-boot-starter-web, spring-core, thymeleaf-spring4, thymeleaf-layout-dialect-->
+        </dependency>
+
+
+        <!--Spring Boot Tools for Faster Development-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional>
+        </dependency>
+    </dependencies>
+
+    <!--  ====================================================================================================  -->
+    <!--                                                  BUILD                                                 -->
+    <!--  ====================================================================================================  -->
+
+    <build>
+        <plugins>
+           <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>1.4.1.RELEASE</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

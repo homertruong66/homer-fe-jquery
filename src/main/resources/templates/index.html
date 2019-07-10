@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html  xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>TECH3S App</title>
+    <!--JS 3rdparty-->
+    <script type="text/javascript" src="jquery_ui_app/3rdparty/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="jquery_ui_app/3rdparty/sammy-0.7.6.min.js"></script>
+
+    <!--JS common-->
+    <script type="text/javascript" src="jquery_ui_app/common/AppFramework.js"></script>
+    <script type="text/javascript" src="jquery_ui_app/common/Constant.js"></script>
+    <script type="text/javascript" src="jquery_ui_app/common/RequestManager.js"></script>
+    <script type="text/javascript" src="jquery_ui_app/common/Util.js"></script>
+
+    <!--JS app-->
+    <script type="text/javascript" src="jquery_ui_app/model/User.js" />
+    <script type="text/javascript" src="jquery_ui_app/model/Member.js" />
+    <script type="text/javascript" src="jquery_ui_app/controller/UserController.js" />
+    <script type="text/javascript" src="jquery_ui_app/controller/MemberController.js" />
+    <script type="text/javascript" src="jquery_ui_app/Starter.js"></script>
+</head>
+
+<body>
+
+    <h1 align="center">TECH3S Application</h1>
+
+    <div id="login" data-controller="UserController" data-model-name="LoginModel" style="margin: 0 auto">
+        <h1>Login</h1>
+        <div>
+            <label>Email: </label><input class="field" type="text" name="username" autofocus="true"/>
+        </div>
+        <div>
+            <label> Password: </label><input class="field" type="password" name="password"/>
+        </div>
+        <div>
+            <button data-action="login">Login</button>
+        </div>
+    </div>
+
+    <div id="logout" data-controller="UserController" style="display: none;">
+        <span>Welcome </span><span id="loggedUser" style="color: blue; font-weight: bold"></span> <button data-action="logout">Logout</button>
+    </div>
+
+    <div id="content" style="display: none;">
+        <div>
+            <a href="#/">Home</a> | <a href="#/users">User</a> | <a href="#/members">Members</a>
+        </div>
+
+        <div id="intro" style="display: none;">
+            <p>TECH3S APP is an application that helps manage Members of TECH3S. Click on menu items to start....</p>
+        </div>
+
+
+        <!--User-->
+        <div id="user-section" style="display: none;" data-controller="UserController" >
+            <div id="user-list" data-model-name="UserSearchModel">
+                <fieldset>
+                    <legend>User Management</legend>
+                    <div>
+                        <label>Search: </label> <input name="name" data-action="search" />
+                    </div>
+                    <br/>
+
+                    <ol id="user-table">
+                    </ol>
+                    <button data-action="first" >First</button>
+                    <button data-action="previous" >Previous</button>
+                    <span>Current Page: </span>
+                    <input id="page_index" style="width: 20px;" data-action="onPageIndexChanged" value="1" />
+                    / <span id="num_of_pages"></span> |
+                    <span>Page Size: </span>
+                    <select id="page_size" style="width: 40px;" data-action="onPageSizeChanged">
+                        <option>2</option>
+                        <option selected="selected">4</option>
+                        <option>6</option>
+                        <option>8</option>
+                        <option>10</option>
+                        <option>20</option>
+                    </select>
+                    <button data-action="next" >Next</button>
+                    <button data-action="last" >Last</button>
+                    <br/><br/>
+                    <button data-action="create" >New</button>
+                </fieldset>
+            </div>
+            <br />
+            <br />
+
+            <div id="user-edit" style="display: none;" data-model-name="UserEditModel">
+                <fieldset>
+                    <legend>User Edit</legend>
+                    <div id="user-form" action="#">
+                        <div style="display: none">
+                            <label style="width: 140px;">Id: </label><input class="field" name="id" type="text" />
+                        </div>
+                        <div>
+                            <label style="width: 140px;">Email: </label><input class="field" name="email" type="text" />
+                        </div>
+                        <div>
+                            <label style="width: 140px;" name="confirmedEmailLabel">Confirmed Email: </label><input class="field" name="confirmedEmail" type="text" />
+                        </div>
+                        <div>
+                            <label style="width: 140px;">Password: </label><input class="field" name="password" type="password" />
+                        </div>
+                        <div>
+                            <label style="width: 140px;" name="confirmedPasswordLabel">Confirmed Password: </label><input class="field" name="confirmedPassword" type="password" />
+                        </div>
+                        <div>
+                            <label style="width: 140px;">Name: </label><input class="field" name="name" type="text" />
+                        </div>
+                        <div>
+                            <label style="width: 140px;">Age: </label><input class="field" name="age" type="text" />
+                        </div>
+                        <div>
+                            <label style="width: 140px;">Roles: </label>
+                            <select name="roles" multiple="true">
+                                <option>ROLE_ADMIN</option>
+                                <option>ROLE_USER</option>
+                                <option>ROLE_STUDENT</option>
+                                <option>ROLE_TEACHER</option>
+                            </select>
+                        </div>
+                        <div style="display: none">
+                            <label style="width: 140px;">Version: </label><input class="field" name="version" type="text" />
+                        </div>
+                        <div>
+                            <button style="margin-left: 20px; width: 100px;" data-action="save" >
+                                Save
+                            </button>
+                            <button style="margin-left: 20px; width: 100px;" data-action="cancelEdit" >
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+
+        <!--Member-->
+        <div id="member-section" style="display: none;" data-controller="MemberController" >
+            <div>
+                <h2>Upload Members</h2>
+                <form id="member_upload_form" method="post" enctype="multipart/form-data">
+                    <input type="text" name="text" value="text" />
+                    <input type="file" name="file"  />
+                    <button>Upload</button>
+                </form>
+            </div>
+
+            <div id="member-list" data-model-name="MemberSearchModel">
+                <fieldset>
+                    <legend>Member Management</legend>
+                    <div>
+                        <label>Search: </label> <input name="name" data-action="search" />
+                    </div>
+                    <br/>
+
+                    <ol id="member-table">
+                    </ol>
+                    <button data-action="first" >First</button>
+                    <button data-action="previous" >Previous</button>
+                    <span>Current Page: </span>
+                    <input id="page_index" style="width: 20px;" data-action="onPageIndexChanged" value="1" />
+                    / <span id="num_of_pages"></span> |
+                    <span>Page Size: </span>
+                    <select id="page_size" style="width: 40px;" data-action="onPageSizeChanged">
+                        <option>2</option>
+                        <option selected="selected">4</option>
+                        <option>6</option>
+                        <option>8</option>
+                        <option>10</option>
+                        <option>20</option>
+                    </select>
+                    <button data-action="next" >Next</button>
+                    <button data-action="last" >Last</button>
+
+                    <br/>
+                    <br/>
+                    <label>Subject: </label><input name="subject" type="text" style="width: 600px;" />
+                    <br/><br/>
+                    <label>Content: </label><textarea name="content" style="width: 600px; height: 100px;" />
+                    <br/><br/>
+                    <button data-action="sendMailsToAllMembers" >Send mails to all Members</button>
+                    <button data-action="sendMailsToStudents" >Send mails to Students</button>
+                    <button data-action="sendMailsToDevelopers" >Send mails to Developers</button>
+                </fieldset>
+            </div>
+            <br />
+            <br />
+
+            <div id="member-edit" data-model-name="MemberEditModel" style="display: none;">
+                <fieldset>
+                    <legend>Member Edit</legend>
+                    <div id="member-form" action="#">
+                        <div style="display: none">
+                            <label>Id: </label><input class="field" name="id" type="text" />
+                        </div>
+                        <div>
+                            <label>Email: </label><input class="field" name="email" type="text" />
+                        </div>
+                        <div>
+                            <label>Name: </label><input class="field" name="name" type="text" />
+                        </div>
+                        <div>
+                            <label>Phone: </label><input class="field" name="phone" type="text" />
+                        </div>
+                        <div>
+                            <label>Job: </label><input class="field" name="job" type="text" />
+                        </div>
+                        <div>
+                            <label>Company: </label><input class="field" name="company" type="text" />
+                        </div>
+                        <div style="display: none">
+                            <label>Version: </label><input class="field" name="version" type="text" />
+                        </div>
+                        <div>
+                            <button style="margin-left: 20px; width: 100px;" data-action="save" >
+                                Save
+                            </button>
+                            <button style="margin-left: 20px; width: 100px;" data-action="cancelEdit" >
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
