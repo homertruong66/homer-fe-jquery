@@ -24,7 +24,7 @@
 
 <body>
 
-    <h1 align="center">TECH3S Application</h1>
+    <h1 align="center">Family Finance Manager</h1>
 
     <div id="login" data-controller="UserController" data-model-name="LoginModel" style="margin: 0 auto">
         <h1>Login</h1>
@@ -45,19 +45,20 @@
 
     <div id="content" style="display: none;">
         <div>
-            <a href="#/">Home</a> | <a href="#/users">User</a> | <a href="#/members">Members</a>
+            <a href="#/">Home</a> | <a href="#/users">Admins</a> | <a href="#/members">Members</a>
         </div>
 
         <div id="intro" style="display: none;">
-            <p>TECH3S APP is an application that helps manage Members of TECH3S. Click on menu items to start....</p>
+            <p>Family Finance Manager helps families manage cash flow effectively.</p>
+            <p>Click on menu items to start....</p>
         </div>
 
 
-        <!--User-->
+        <!--Admin-->
         <div id="user-section" style="display: none;" data-controller="UserController" >
             <div id="user-list" data-model-name="UserSearchModel">
                 <fieldset>
-                    <legend>User Management</legend>
+                    <legend>Admin Management</legend>
                     <div>
                         <label>Search: </label> <input name="name" data-action="search" />
                     </div>
@@ -113,15 +114,6 @@
                         <div>
                             <label style="width: 140px;">Age: </label><input class="field" name="age" type="text" />
                         </div>
-                        <div>
-                            <label style="width: 140px;">Roles: </label>
-                            <select name="roles" multiple="true">
-                                <option>ROLE_ADMIN</option>
-                                <option>ROLE_USER</option>
-                                <option>ROLE_STUDENT</option>
-                                <option>ROLE_TEACHER</option>
-                            </select>
-                        </div>
                         <div style="display: none">
                             <label style="width: 140px;">Version: </label><input class="field" name="version" type="text" />
                         </div>
@@ -140,15 +132,6 @@
 
         <!--Member-->
         <div id="member-section" style="display: none;" data-controller="MemberController" >
-            <div>
-                <h2>Upload Members</h2>
-                <form id="member_upload_form" method="post" enctype="multipart/form-data">
-                    <input type="text" name="text" value="text" />
-                    <input type="file" name="file"  />
-                    <button>Upload</button>
-                </form>
-            </div>
-
             <div id="member-list" data-model-name="MemberSearchModel">
                 <fieldset>
                     <legend>Member Management</legend>

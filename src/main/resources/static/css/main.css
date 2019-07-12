@@ -16,11 +16,6 @@
     margin-left: 200px;
 }
 
-#university-section, #department-section, #course-section, #teacher-section,
-#student-section, #clazz-section, #registration-section, #assigned-section {
-    display: none;
-}
-
 fieldset {
     width: 98%;
 }
