@@ -128,7 +128,7 @@
         lastsel = null;
       },      
 
-      onPaging: function () { // first,prev,next,last,records,user
+      onPaging: function () { // first,prev,next,last,records
         // do not count rows
         needRowCount = false;
 

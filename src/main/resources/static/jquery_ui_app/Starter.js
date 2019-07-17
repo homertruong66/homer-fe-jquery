@@ -53,13 +53,14 @@
     },
 
     initApp: function () {
-        // update user profile
+        // update User profile
         var userProfile = Util.getUserProfile();
-        $('#loggedUser').text(userProfile.name);
+        $('#loggedAdmin').text(userProfile.name);
 
         // init sections
         globalObject.currentView = $('#intro');
-        UserController.init();
+        SecurityController.init();
+        AdminController.init();
         MemberController.init();
 
         // init routers
@@ -69,14 +70,14 @@
                 globalObject.currentView.show();
             });
 
-            // User
-            this.get('#/users', function(context) {
-                UserController.index();
+            // Admin
+            this.get('#/admins', function(context) {
+                AdminController.index();
             });
 
-            this.get('#/users/:id', function(context) {
+            this.get('#/admins/:id', function(context) {
                 var id = this.params['id'];
-                UserController.update(id);
+                AdminController.update(id);
             });
 
             // Member
@@ -110,8 +111,8 @@ $(function() {
         Starter.initApp();
     }
     else {
-        // init User for login function
-        UserController.init();
+        // init SecurityController for login function
+        SecurityController.init();
     }
 
     // register listener for member upload form

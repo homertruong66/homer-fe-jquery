@@ -1,17 +1,15 @@
-var UserController = {
+var AdminController = {
 
     // Properties
-    baseUrl: globalObject.apiUrl + '/v1/users/',
+    baseUrl: globalObject.apiUrl + '/v1/admins/',
     pagingModel: {},
-    viewLogin: '#login',
-    viewMain: '#user-section',
-    viewList: '#user-list',
-    viewTable: '#user-table',
-    viewEdit: '#user-edit',
+    viewMain: '#admin-section',
+    viewList: '#admin-list',
+    viewTable: '#admin-table',
+    viewEdit: '#admin-edit',
 
     // Methods
     init: function () {
-        this.$viewLogin = $(this.viewLogin);
         this.$viewMain = $(this.viewMain);
         this.$viewList = $(this.viewList);
         this.$viewTable = $(this.viewTable);
@@ -99,7 +97,7 @@ var UserController = {
                 me.$viewTable.append(
                     '<li>' +
                         me.toString(item) +
-                        ' <a class="button" href="#/users/' + item.id + '">Update</a> ' +
+                        ' <a class="button" href="#/admins/' + item.id + '">Update</a> ' +
                         ' <a class="button" data-action="del" data-id="' + item.id + '">Delete</a> ' +
                     '</li>');
             });
@@ -120,64 +118,6 @@ var UserController = {
 
     last: function (event, $target) {
         NavigationUtil.goLast(this);
-    },
-
-    login: function (event, $target) {
-        var $view = this.$viewLogin;
-
-        // TODO: validate view
-//        if ($view.validateForm()) {
-//        }
-        var model = $view.createModel();
-        DataUtil.unbind($view, model);
-
-        var headers = {};
-        headers.username = model.username;
-        headers.password = model.password;
-        $.ajax({
-            url         : 'http://localhost:9090/login',
-            type        : 'POST',
-            headers     : headers,
-            dataType    : 'text',
-            contentType : 'text/plain',
-
-            success: function (data, textStatus, jqXHR) {
-                var tokenKey = globalObject.headerSecurityTokenKey;
-                var userProfileKey = globalObject.headerUserProfileKey;
-                localStorage[tokenKey] = jqXHR.getResponseHeader(tokenKey);
-                localStorage[userProfileKey] = jqXHR.getResponseHeader(userProfileKey);
-                $("#login").hide();
-                $("#logout").show();
-                $("#content").show();
-
-                // init routers
-                Starter.initApp();
-            }
-        });
-    },
-
-    logout: function (event, $target) {
-        var headers = {};
-        headers[globalObject.headerSecurityTokenKey] = localStorage[globalObject.headerSecurityTokenKey];
-
-        // clear local token
-        localStorage.removeItem(globalObject.headerSecurityTokenKey);
-        localStorage.removeItem(globalObject.headerUserProfileKey);
-
-        // remove token on server
-        $.ajax({
-            url         : 'http://localhost:9090/logout',
-            type        : 'POST',
-            headers     : headers,
-            dataType    : 'text',
-            contentType : 'text/plain',
-
-            success: function (data, textStatus, jqXHR) {
-                $("#login").show();
-                $("#logout").hide();
-                $("#content").hide();
-            }
-        });
     },
 
     next: function (event, $target) {
@@ -225,7 +165,7 @@ var UserController = {
         options['data'] = model,
         options['callback'] = function(result){
             // 5. change view and do other stuffs
-            document.location.hash = '#/users';
+            document.location.hash = '#/admins';
 
             // 6. enable target
             $target.setEnabled(true);
@@ -249,7 +189,7 @@ var UserController = {
     },
 
     toString: function (item) {
-        return item.email + ' (' + item.roles + ' - ' + item.name;
+        return item.first_name + ' ' + item.last_name + ' | ' + item.user.email;
     },
 
     update: function (id) {

@@ -1,20 +1,4 @@
-﻿var LoginModel = {
-    // Properties
-    username    : '',
-    password	: '',
-
-    // Methods
-    create: function () {
-        return $.extend({}, this);
-    },
-
-    validate: function (errors) {
-
-        return true;
-    }
-}
-
-var UserEditModel = {
+﻿var AdminEditModel = {
 
     // Properties
     id: '',
@@ -43,7 +27,7 @@ var UserEditModel = {
     }
 };
 
-var UserSearchModel = {
+var AdminSearchModel = {
 
     // Properties
     name		: '',

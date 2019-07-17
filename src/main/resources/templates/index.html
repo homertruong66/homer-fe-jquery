@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<html  xmlns="http://www.w3.org/1999/xhtml"
-       xmlns:th="http://www.thymeleaf.org">
+<html  xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-    <title>TECH3S App</title>
+    <title>TECH3S Web Application</title>
     <!--JS 3rdparty-->
     <script type="text/javascript" src="jquery_ui_app/3rdparty/jquery-3.1.1.min.js"></script>
     <script type="text/javascript" src="jquery_ui_app/3rdparty/sammy-0.7.6.min.js"></script>
@@ -15,21 +14,25 @@
     <script type="text/javascript" src="jquery_ui_app/common/Util.js"></script>
 
     <!--JS app-->
-    <script type="text/javascript" src="jquery_ui_app/model/User.js" />
+    <script type="text/javascript" src="jquery_ui_app/model/Admin.js" />
     <script type="text/javascript" src="jquery_ui_app/model/Member.js" />
-    <script type="text/javascript" src="jquery_ui_app/controller/UserController.js" />
+    <script type="text/javascript" src="jquery_ui_app/controller/SecurityController.js" />
+    <script type="text/javascript" src="jquery_ui_app/controller/AdminController.js" />
     <script type="text/javascript" src="jquery_ui_app/controller/MemberController.js" />
+    <script type="text/javascript" src="jquery_ui_app/view_model/LoginModel.js" />
+    <script type="text/javascript" src="jquery_ui_app/view_model/SearchModel.js" />
     <script type="text/javascript" src="jquery_ui_app/Starter.js"></script>
 </head>
 
 <body>
 
-    <h1 align="center">Family Finance Manager</h1>
+    <h1 align="center">TECH3S Web Application</h1>
 
-    <div id="login" data-controller="UserController" data-model-name="LoginModel" style="margin: 0 auto">
+    <!--Login section-->
+    <div id="login" data-controller="SecurityController" data-model-name="LoginModel" style="margin: 0 auto">
         <h1>Login</h1>
         <div>
-            <label>Email: </label><input class="field" type="text" name="username" autofocus="true"/>
+            <label>Email: </label><input class="field" type="text" name="email" autofocus="true"/>
         </div>
         <div>
             <label> Password: </label><input class="field" type="password" name="password"/>
@@ -39,24 +42,33 @@
         </div>
     </div>
 
-    <div id="logout" data-controller="UserController" style="display: none;">
-        <span>Welcome </span><span id="loggedUser" style="color: blue; font-weight: bold"></span> <button data-action="logout">Logout</button>
+
+    <!--Logout section-->
+    <div id="logout" data-controller="AdminController" style="display: none;">
+        <span>Welcome </span><span id="loggedAdmin" style="color: blue; font-weight: bold"></span> <button data-action="logout">Logout</button>
     </div>
 
-    <div id="content" style="display: none;">
-        <div>
-            <a href="#/">Home</a> | <a href="#/users">Admins</a> | <a href="#/members">Members</a>
-        </div>
 
+    <!--Main content-->
+    <div id="content" style="display: none;">
+        <!--Menu-->
+        <div>
+            <a href="#/">Home</a> | <a href="#/admins">Admins</a> | <a href="#/members">Members</a>
+        </div>
+        <!--End Menu-->
+
+
+        <!--Introduction-->
         <div id="intro" style="display: none;">
-            <p>Family Finance Manager helps families manage cash flow effectively.</p>
+            <p>TECH3S Web Application is built on SPA (Single Page Application) model.</p>
             <p>Click on menu items to start....</p>
         </div>
+        <!--End Introduction-->
 
 
         <!--Admin-->
-        <div id="user-section" style="display: none;" data-controller="UserController" >
-            <div id="user-list" data-model-name="UserSearchModel">
+        <div id="admin-section" style="display: none;" data-controller="AdminController" >
+            <div id="admin-list" data-model-name="AdminSearchModel">
                 <fieldset>
                     <legend>Admin Management</legend>
                     <div>
@@ -64,7 +76,7 @@
                     </div>
                     <br/>
 
-                    <ol id="user-table">
+                    <ol id="admin-table">
                     </ol>
                     <button data-action="first" >First</button>
                     <button data-action="previous" >Previous</button>
@@ -89,10 +101,10 @@
             <br />
             <br />
 
-            <div id="user-edit" style="display: none;" data-model-name="UserEditModel">
+            <div id="admin-edit" style="display: none;" data-model-name="AdminEditModel">
                 <fieldset>
-                    <legend>User Edit</legend>
-                    <div id="user-form" action="#">
+                    <legend>Admin Edit</legend>
+                    <div id="admin-form" action="#">
                         <div style="display: none">
                             <label style="width: 140px;">Id: </label><input class="field" name="id" type="text" />
                         </div>
@@ -129,6 +141,8 @@
                 </fieldset>
             </div>
         </div>
+        <!--End Admin-->
+
 
         <!--Member-->
         <div id="member-section" style="display: none;" data-controller="MemberController" >
@@ -158,16 +172,6 @@
                     </select>
                     <button data-action="next" >Next</button>
                     <button data-action="last" >Last</button>
-
-                    <br/>
-                    <br/>
-                    <label>Subject: </label><input name="subject" type="text" style="width: 600px;" />
-                    <br/><br/>
-                    <label>Content: </label><textarea name="content" style="width: 600px; height: 100px;" />
-                    <br/><br/>
-                    <button data-action="sendMailsToAllMembers" >Send mails to all Members</button>
-                    <button data-action="sendMailsToStudents" >Send mails to Students</button>
-                    <button data-action="sendMailsToDevelopers" >Send mails to Developers</button>
                 </fieldset>
             </div>
             <br />
@@ -210,7 +214,7 @@
                 </fieldset>
             </div>
         </div>
-
+        <!--End Member-->
     </div>
 
 </body>
