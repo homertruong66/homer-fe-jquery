@@ -12,7 +12,6 @@ public class MainController {
 
     @RequestMapping("/")
     public String index() {
-        System.out.println("auto refresh 1");
         return "index";
     }
 

@@ -2,8 +2,8 @@
 <html  xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-    <title>TECH3S Web Application</title>
-    <!--JS 3rdparty-->
+    <title>TECH3S Simple Web Application</title>
+    <!--JS 3rd-party-->
     <script type="text/javascript" src="jquery_ui_app/3rdparty/jquery-3.1.1.min.js"></script>
     <script type="text/javascript" src="jquery_ui_app/3rdparty/sammy-0.7.6.min.js"></script>
 
@@ -14,19 +14,19 @@
     <script type="text/javascript" src="jquery_ui_app/common/Util.js"></script>
 
     <!--JS app-->
-    <script type="text/javascript" src="jquery_ui_app/model/Admin.js" />
-    <script type="text/javascript" src="jquery_ui_app/model/Member.js" />
-    <script type="text/javascript" src="jquery_ui_app/controller/SecurityController.js" />
-    <script type="text/javascript" src="jquery_ui_app/controller/AdminController.js" />
-    <script type="text/javascript" src="jquery_ui_app/controller/MemberController.js" />
-    <script type="text/javascript" src="jquery_ui_app/view_model/LoginModel.js" />
-    <script type="text/javascript" src="jquery_ui_app/view_model/SearchModel.js" />
+    <script type="text/javascript" src="jquery_ui_app/controller/SecurityController.js" ></script>
+    <script type="text/javascript" src="jquery_ui_app/controller/AdminController.js" ></script>
+    <script type="text/javascript" src="jquery_ui_app/controller/MemberController.js" ></script>
+    <script type="text/javascript" src="jquery_ui_app/view_model/LoginModel.js" ></script>
+    <script type="text/javascript" src="jquery_ui_app/view_model/SearchModel.js" ></script>
+    <script type="text/javascript" src="jquery_ui_app/view_model/AdminModel.js" ></script>
+    <script type="text/javascript" src="jquery_ui_app/view_model/MemberModel.js" ></script>
     <script type="text/javascript" src="jquery_ui_app/Starter.js"></script>
 </head>
 
 <body>
 
-    <h1 align="center">TECH3S Web Application</h1>
+    <h1 align="center" style="color: blue; font-weight: bold">TECH3S Simple Web Application</h1>
 
     <!--Login section-->
     <div id="login" data-controller="SecurityController" data-model-name="LoginModel" style="margin: 0 auto">
@@ -44,8 +44,9 @@
 
 
     <!--Logout section-->
-    <div id="logout" data-controller="AdminController" style="display: none;">
-        <span>Welcome </span><span id="loggedAdmin" style="color: blue; font-weight: bold"></span> <button data-action="logout">Logout</button>
+    <div id="logout" data-controller="SecurityController" style="display: none;">
+        <span>Welcome </span><span id="loggedUser" style="color: blue; font-weight: bold"></span>
+        <button data-action="logout">Logout</button>
     </div>
 
 
@@ -60,7 +61,7 @@
 
         <!--Introduction-->
         <div id="intro" style="display: none;">
-            <p>TECH3S Web Application is built on SPA (Single Page Application) model.</p>
+            <p>TECH3S Simple Web Application is built on SPA (Single Page Application) model.</p>
             <p>Click on menu items to start....</p>
         </div>
         <!--End Introduction-->
@@ -106,28 +107,36 @@
                     <legend>Admin Edit</legend>
                     <div id="admin-form" action="#">
                         <div style="display: none">
-                            <label style="width: 140px;">Id: </label><input class="field" name="id" type="text" />
+                            <label style="width: 140px;">Id: </label>
+                            <input class="field" name="id" type="text" />
                         </div>
                         <div>
-                            <label style="width: 140px;">Email: </label><input class="field" name="email" type="text" />
+                            <label style="width: 140px;">Email: </label>
+                            <input class="field" name="email" type="text" />
                         </div>
                         <div>
-                            <label style="width: 140px;" name="confirmedEmailLabel">Confirmed Email: </label><input class="field" name="confirmedEmail" type="text" />
+                            <label style="width: 140px;" name="confirmed_email_label">Confirmed Email: </label>
+                            <input class="field" name="confirmed_email" type="text" />
                         </div>
                         <div>
-                            <label style="width: 140px;">Password: </label><input class="field" name="password" type="password" />
+                            <label style="width: 140px;">Password: </label>
+                            <input class="field" name="password" type="password" />
                         </div>
                         <div>
-                            <label style="width: 140px;" name="confirmedPasswordLabel">Confirmed Password: </label><input class="field" name="confirmedPassword" type="password" />
+                            <label style="width: 140px;" name="confirmed_password_label">Confirmed Password: </label>
+                            <input class="field" name="confirmed_password" type="password" />
                         </div>
                         <div>
-                            <label style="width: 140px;">Name: </label><input class="field" name="name" type="text" />
+                            <label style="width: 140px;">First Name: </label>
+                            <input class="field" name="first_name" type="text" />
                         </div>
                         <div>
-                            <label style="width: 140px;">Age: </label><input class="field" name="age" type="text" />
+                            <label style="width: 140px;">Last Name: </label>
+                            <input class="field" name="last_name" type="text" />
                         </div>
-                        <div style="display: none">
-                            <label style="width: 140px;">Version: </label><input class="field" name="version" type="text" />
+                        <div>
+                            <label style="width: 140px;">Phone: </label>
+                            <input class="field" name="phone" type="text" />
                         </div>
                         <div>
                             <button style="margin-left: 20px; width: 100px;" data-action="save" >
@@ -172,6 +181,8 @@
                     </select>
                     <button data-action="next" >Next</button>
                     <button data-action="last" >Last</button>
+                    <br/><br/>
+                    <button data-action="create" >New</button>
                 </fieldset>
             </div>
             <br />
@@ -182,25 +193,40 @@
                     <legend>Member Edit</legend>
                     <div id="member-form" action="#">
                         <div style="display: none">
-                            <label>Id: </label><input class="field" name="id" type="text" />
+                            <label>Id: </label>
+                            <input class="field" name="id" type="text" />
                         </div>
                         <div>
-                            <label>Email: </label><input class="field" name="email" type="text" />
+                            <label>Email: </label>
+                            <input class="field" name="email" type="text" />
                         </div>
                         <div>
-                            <label>Name: </label><input class="field" name="name" type="text" />
+                            <label style="width: 140px;" name="confirmed_email_label">Confirmed Email: </label>
+                            <input class="field" name="confirmed_email" type="text" />
                         </div>
                         <div>
-                            <label>Phone: </label><input class="field" name="phone" type="text" />
+                            <label style="width: 140px;">Password: </label>
+                            <input class="field" name="password" type="password" />
                         </div>
                         <div>
-                            <label>Job: </label><input class="field" name="job" type="text" />
+                            <label style="width: 140px;" name="confirmed_password_label">Confirmed Password: </label>
+                            <input class="field" name="confirmed_password" type="password" />
                         </div>
                         <div>
-                            <label>Company: </label><input class="field" name="company" type="text" />
+                            <label>First Name: </label>
+                            <input class="field" name="first_name" type="text" />
                         </div>
-                        <div style="display: none">
-                            <label>Version: </label><input class="field" name="version" type="text" />
+                        <div>
+                            <label>Last Name: </label>
+                            <input class="field" name="last_name" type="text" />
+                        </div>
+                        <div>
+                            <label>Phone: </label>
+                            <input class="field" name="phone" type="text" />
+                        </div>
+                        <div>
+                            <label>Position: </label>
+                            <input class="field" name="position" type="text" />
                         </div>
                         <div>
                             <button style="margin-left: 20px; width: 100px;" data-action="save" >

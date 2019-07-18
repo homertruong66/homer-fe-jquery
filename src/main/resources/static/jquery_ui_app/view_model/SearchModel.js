@@ -1,11 +1,20 @@
 ﻿var searchModel = {
 
 	// Properties
-	 name: "",
+	criteria: {
+	},
+
+	custom_criteria: {
+	},
+
+	sort_name: 'id',
+	is_sort_asc: true,
+	page_index: 1,
+	page_size: 10,
 
 	// Methods
 	create: function () {
-		$.extend({}, this);
+		return $.extend({}, this);
 	},
 
 	equals: function (model) {		

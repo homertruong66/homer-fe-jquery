@@ -34,8 +34,8 @@ var AdminController = {
 
         // 4. do other stuffs
         $view.find('[disabled]').removeAttr('disabled');
-        $view.find('[name=confirmedEmailLabel], [name=confirmedPasswordLabel],' +
-                   '[name=confirmedEmail], [name=confirmedPassword]').show();
+        $view.find('[name=confirmed_email_label], [name=confirmed_password_label],' +
+                   '[name=confirmed_email], [name=confirmed_password]').show();
 
         // 5. show the view
         $view.show();
@@ -69,17 +69,17 @@ var AdminController = {
         var me = this;
         var $view = this.$viewList;
         var searchModel = $view.createModel();
-        searchModel['name'] = $('[name=name]', this.$viewList).val();
+        searchModel.custom_criteria["email"] = '%' + $('[name=name]', this.$viewList).val() + '%';
 
         if (!pageIndex) {
             pageIndex = $('#page_index', this.$viewList).val();
         }
-        searchModel['pageIndex'] = pageIndex;
+        searchModel['page_index'] = pageIndex;
 
         if (!pageSize) {
             pageSize = $('#page_size', this.$viewList).val();
         }
-        searchModel['pageSize'] = pageSize;
+        searchModel['page_size'] = pageSize;
 
         // TODO: validate model
 
@@ -165,6 +165,7 @@ var AdminController = {
         options['data'] = model,
         options['callback'] = function(result){
             // 5. change view and do other stuffs
+            $view.hide();
             document.location.hash = '#/admins';
 
             // 6. enable target
@@ -189,7 +190,9 @@ var AdminController = {
     },
 
     toString: function (item) {
-        return item.first_name + ' ' + item.last_name + ' | ' + item.user.email;
+        return item.first_name + ' ' + item.last_name
+             + ' | ' + item.user.email
+             + ' | ' + item.user.phone;
     },
 
     update: function (id) {
@@ -211,22 +214,25 @@ var AdminController = {
 
             // 4. bind model to view
             DataUtil.bind($view, model);
-            var $options = $('[name=roles] option', me.$viewEdit);
-            $options.each(function(index, item) {
-                var $item = $(item);
-                var role = $item.val();
-                if ($.inArray(role, entity.roles) != -1) {
-                  $item.prop('selected', true);
-                }
-                else {
-                  $item.prop('selected', false);
-                }
-            });
+//            var $options = $('[name=roles] option', me.$viewEdit);
+//            $options.each(function(index, item) {
+//                var $item = $(item);
+//                var role = $item.val();
+//                if ($.inArray(role, entity.roles) != -1) {
+//                  $item.prop('selected', true);
+//                }
+//                else {
+//                  $item.prop('selected', false);
+//                }
+//            });
+            // custom binding
+            $('[name=email]', $view).val(model.user.email);
+            $('[name=phone]', $view).val(model.user.phone);
 
             // 5. do other stuffs
-            $view.find('[name=email], [name=password]').attr('disabled','disabled');   // don't allow update email and password fields
-            $view.find('[name=confirmedEmail], [name=confirmedPassword], ' +
-                       '[name=confirmedEmailLabel], [name=confirmedPasswordLabel]').hide();
+            $view.find('[name=email], [name=password]').attr('disabled','disabled');
+            $view.find('[name=confirmed_email_label], [name=confirmed_password_label],' +
+                       '[name=confirmed_email], [name=confirmed_password]').hide();
             $view.show();
 
             // 6. enable target

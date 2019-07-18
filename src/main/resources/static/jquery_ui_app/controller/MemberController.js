@@ -20,6 +20,30 @@ var MemberController = {
         this.$viewEdit.hide();
     },
 
+    create: function (event, $target) {
+        // 1. disable target
+        $target.setEnabled(false);
+
+        // 2. prepare model for the view
+        var $view = this.$viewEdit;
+        var model = $view.createModel();
+        $view.data('model', model);                         // set model to $view to use in save method
+
+        // 3. bind the model to the view
+        DataUtil.bind($view, model);
+
+        // 4. do other stuffs
+        $view.find('[disabled]').removeAttr('disabled');
+        $view.find('[name=confirmed_email_label], [name=confirmed_password_label],' +
+                   '[name=confirmed_email], [name=confirmed_password]').show();
+
+        // 5. show the view
+        $view.show();
+
+        // 6. enable target
+        $target.setEnabled(true);
+    },
+
     del: function (event, $target) {
         if (!confirm('Are you sure you want to delete?')) {
             return;
@@ -45,17 +69,17 @@ var MemberController = {
         var me = this;
         var $view = this.$viewList;
         var searchModel = $view.createModel();
-        searchModel['name'] = $('[name=name]', this.$viewList).val();
+        searchModel.custom_criteria["email"] = '%' + $('[name=name]', this.$viewList).val() + '%';
 
         if (!pageIndex) {
             pageIndex = $('#page_index', this.$viewList).val();
         }
-        searchModel['pageIndex'] = pageIndex;
+        searchModel['page_index'] = pageIndex;
 
         if (!pageSize) {
             pageSize = $('#page_size', this.$viewList).val();
         }
-        searchModel['pageSize'] = pageSize;
+        searchModel['page_size'] = pageSize;
 
         // TODO: validate model
 
@@ -74,7 +98,6 @@ var MemberController = {
                     '<li>' +
                         me.toString(item) +
                         ' <a class="button" href="#/members/' + item.id + '">Update</a> ' +
-                        ' <a class="button" data-action="del" data-id="' + item.id + '">Delete</a> ' +
                     '</li>');
             });
 
@@ -89,6 +112,7 @@ var MemberController = {
         var $view = this.$viewMain;
         $.showSection(this, $view);
         $.updateSectionTitle($view);
+        this.$viewEdit.hide();
 
         // globalObject.currentView.hide();
         // globalObject.currentView = this.$viewMain;
@@ -130,6 +154,7 @@ var MemberController = {
 //        }
         var model = $view.data('model');
         DataUtil.unbind($view, model);
+        model.fe_url = window.location.protocol + "//" + window.location.host
 //        if (model.validate(errors)) {
 //        }
         // 3. prepare post data for AJAX request
@@ -165,7 +190,10 @@ var MemberController = {
     },
 
     toString: function (item) {
-        return item.first_name + ' ' + item.last_name + ' | ' + item.user.email;
+        return item.first_name + ' ' + item.last_name
+             + ' | ' + item.position
+             + ' | ' + item.user.email
+             + ' | ' + item.user.phone;
     },
 
     update: function (id) {
@@ -187,9 +215,14 @@ var MemberController = {
 
             // 4. bind model to view
             DataUtil.bind($view, model);
+            // custom binding
+            $('[name=email]', $view).val(model.user.email);
+            $('[name=phone]', $view).val(model.user.phone);
 
             // 5. do other stuffs and show the view
-            $view.find('[name=email]').attr('disabled','disabled');   // don't allow update email
+            $view.find('[name=email], [name=password]').attr('disabled','disabled');
+            $view.find('[name=confirmed_email_label], [name=confirmed_password_label],' +
+                       '[name=confirmed_email], [name=confirmed_password]').hide();
             $view.show();
 
             // 6. enable target

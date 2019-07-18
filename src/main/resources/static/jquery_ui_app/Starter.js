@@ -55,7 +55,7 @@
     initApp: function () {
         // update User profile
         var userProfile = Util.getUserProfile();
-        $('#loggedAdmin').text(userProfile.name);
+        $('#loggedUser').text(userProfile.firstName);
 
         // init sections
         globalObject.currentView = $('#intro');
