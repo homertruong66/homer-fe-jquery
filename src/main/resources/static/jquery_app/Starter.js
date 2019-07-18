@@ -68,6 +68,10 @@
             this.get('#/', function(context) {
                 globalObject.currentView = $('#intro');
                 globalObject.currentView.show();
+
+                // hide other sections
+                $('#admin-section').hide();
+                $('#member-section').hide();
             });
 
             // Admin

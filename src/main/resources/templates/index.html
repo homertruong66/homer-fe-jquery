@@ -3,30 +3,39 @@
 
 <head>
     <title>TECH3S Simple Web Application</title>
+
     <!--JS 3rd-party-->
-    <script type="text/javascript" src="jquery_ui_app/3rdparty/jquery-3.1.1.min.js"></script>
-    <script type="text/javascript" src="jquery_ui_app/3rdparty/sammy-0.7.6.min.js"></script>
+    <script type="text/javascript" src="jquery_app/3rdparty/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="jquery_app/3rdparty/sammy-0.7.6.min.js"></script>
 
     <!--JS common-->
-    <script type="text/javascript" src="jquery_ui_app/common/AppFramework.js"></script>
-    <script type="text/javascript" src="jquery_ui_app/common/Constant.js"></script>
-    <script type="text/javascript" src="jquery_ui_app/common/RequestManager.js"></script>
-    <script type="text/javascript" src="jquery_ui_app/common/Util.js"></script>
+    <script type="text/javascript" src="jquery_app/common/AppFramework.js"></script>
+    <script type="text/javascript" src="jquery_app/common/Constant.js"></script>
+    <script type="text/javascript" src="jquery_app/common/RequestManager.js"></script>
+    <script type="text/javascript" src="jquery_app/common/Util.js"></script>
 
     <!--JS app-->
-    <script type="text/javascript" src="jquery_ui_app/controller/SecurityController.js" ></script>
-    <script type="text/javascript" src="jquery_ui_app/controller/AdminController.js" ></script>
-    <script type="text/javascript" src="jquery_ui_app/controller/MemberController.js" ></script>
-    <script type="text/javascript" src="jquery_ui_app/view_model/LoginModel.js" ></script>
-    <script type="text/javascript" src="jquery_ui_app/view_model/SearchModel.js" ></script>
-    <script type="text/javascript" src="jquery_ui_app/view_model/AdminModel.js" ></script>
-    <script type="text/javascript" src="jquery_ui_app/view_model/MemberModel.js" ></script>
-    <script type="text/javascript" src="jquery_ui_app/Starter.js"></script>
+    <script type="text/javascript" src="jquery_app/controller/SecurityController.js" ></script>
+    <script type="text/javascript" src="jquery_app/controller/AdminController.js" ></script>
+    <script type="text/javascript" src="jquery_app/controller/MemberController.js" ></script>
+    <script type="text/javascript" src="jquery_app/view_model/LoginModel.js" ></script>
+    <script type="text/javascript" src="jquery_app/view_model/SearchModel.js" ></script>
+    <script type="text/javascript" src="jquery_app/view_model/AdminModel.js" ></script>
+    <script type="text/javascript" src="jquery_app/view_model/MemberModel.js" ></script>
+    <script type="text/javascript" src="jquery_app/Starter.js"></script>
+
+    <link rel="stylesheet" href="css/main.css" />
 </head>
 
 <body>
 
-    <h1 align="center" style="color: blue; font-weight: bold">TECH3S Simple Web Application</h1>
+    <!--Profile section-->
+    <div id="logout" data-controller="SecurityController" style="float: right; display: none;">
+        <span>Welcome </span><span id="loggedUser" style="color: blue; font-weight: bold"></span>
+        <button data-action="logout">Logout</button>
+    </div>
+
+    <h1 align="center" style="color: blue; font-weight: bold; clear: both">TECH3S Simple Web Application</h1>
 
     <!--Login section-->
     <div id="login" data-controller="SecurityController" data-model-name="LoginModel" style="margin: 0 auto">
@@ -43,204 +52,207 @@
     </div>
 
 
-    <!--Logout section-->
-    <div id="logout" data-controller="SecurityController" style="display: none;">
-        <span>Welcome </span><span id="loggedUser" style="color: blue; font-weight: bold"></span>
-        <button data-action="logout">Logout</button>
-    </div>
-
-
     <!--Main content-->
     <div id="content" style="display: none;">
         <!--Menu-->
-        <div>
-            <a href="#/">Home</a> | <a href="#/admins">Admins</a> | <a href="#/members">Members</a>
+        <div id="menu">
+            <div id="menu-home">
+                <a href="#/">Home</a>
+            </div>
+            <div id="menu-admin">
+                <a href="#/admins">Admins</a>
+            </div>
+            <div id="menu-member">
+                <a href="#/members">Members</a>
+            </div>
         </div>
         <!--End Menu-->
 
 
         <!--Introduction-->
-        <div id="intro" style="display: none;">
-            <p>TECH3S Simple Web Application is built on SPA (Single Page Application) model.</p>
-            <p>Click on menu items to start....</p>
+        <div id="menu-detail">
+            <div id="intro" style="display: none;">
+                <p>TECH3S Simple Web Application is built on SPA (Single Page Application) model.</p>
+                <p>Click on menu items to start....</p>
+            </div>
+            <!--End Introduction-->
+
+
+            <!--Admin-->
+            <div id="admin-section" style="display: none;" data-controller="AdminController" >
+                <div id="admin-list" data-model-name="AdminSearchModel">
+                    <fieldset>
+                        <legend>Admin Management</legend>
+                        <div>
+                            <label>Search: </label> <input name="name" data-action="search" />
+                        </div>
+                        <br/>
+
+                        <ol id="admin-table">
+                        </ol>
+                        <button data-action="first" >First</button>
+                        <button data-action="previous" >Previous</button>
+                        <span>Current Page: </span>
+                        <input id="page_index" style="width: 20px;" data-action="onPageIndexChanged" value="1" />
+                        / <span id="num_of_pages"></span> |
+                        <span>Page Size: </span>
+                        <select id="page_size" style="width: 40px;" data-action="onPageSizeChanged">
+                            <option>2</option>
+                            <option selected="selected">4</option>
+                            <option>6</option>
+                            <option>8</option>
+                            <option>10</option>
+                            <option>20</option>
+                        </select>
+                        <button data-action="next" >Next</button>
+                        <button data-action="last" >Last</button>
+                        <br/><br/>
+                        <button data-action="create" >New</button>
+                    </fieldset>
+                </div>
+                <br />
+                <br />
+
+                <div id="admin-edit" style="display: none;" data-model-name="AdminEditModel">
+                    <fieldset>
+                        <legend>Admin Edit</legend>
+                        <div id="admin-form" action="#">
+                            <div style="display: none">
+                                <label class="field" >Id: </label>
+                                <input class="field" name="id" type="text" />
+                            </div>
+                            <div>
+                                <label class="field" >Email: </label>
+                                <input class="field" name="email" type="text" />
+                            </div>
+                            <div>
+                                <label class="field" name="confirmed_email_label">Confirmed Email: </label>
+                                <input class="field" name="confirmed_email" type="text" />
+                            </div>
+                            <div>
+                                <label class="field" >Password: </label>
+                                <input class="field" name="password" type="password" />
+                            </div>
+                            <div>
+                                <label class="field"  name="confirmed_password_label">Confirmed Password: </label>
+                                <input class="field" name="confirmed_password" type="password" />
+                            </div>
+                            <div>
+                                <label class="field" >First Name: </label>
+                                <input class="field" name="first_name" type="text" />
+                            </div>
+                            <div>
+                                <label class="field" >Last Name: </label>
+                                <input class="field" name="last_name" type="text" />
+                            </div>
+                            <div>
+                                <label class="field" >Phone: </label>
+                                <input class="field" name="phone" type="text" />
+                            </div>
+                            <div>
+                                <button style="margin-left: 20px; width: 100px;" data-action="save" >
+                                    Save
+                                </button>
+                                <button style="margin-left: 20px; width: 100px;" data-action="cancelEdit" >
+                                    Cancel
+                                </button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+            <!--End Admin-->
+
+
+            <!--Member-->
+            <div id="member-section" style="display: none;" data-controller="MemberController" >
+                <div id="member-list" data-model-name="MemberSearchModel">
+                    <fieldset>
+                        <legend>Member Management</legend>
+                        <div>
+                            <label>Search: </label> <input name="name" data-action="search" />
+                        </div>
+                        <br/>
+
+                        <ol id="member-table">
+                        </ol>
+                        <button data-action="first" >First</button>
+                        <button data-action="previous" >Previous</button>
+                        <span>Current Page: </span>
+                        <input id="page_index" style="width: 20px;" data-action="onPageIndexChanged" value="1" />
+                        / <span id="num_of_pages"></span> |
+                        <span>Page Size: </span>
+                        <select id="page_size" style="width: 40px;" data-action="onPageSizeChanged">
+                            <option>2</option>
+                            <option selected="selected">4</option>
+                            <option>6</option>
+                            <option>8</option>
+                            <option>10</option>
+                            <option>20</option>
+                        </select>
+                        <button data-action="next" >Next</button>
+                        <button data-action="last" >Last</button>
+                        <br/><br/>
+                        <button data-action="create" >New</button>
+                    </fieldset>
+                </div>
+                <br />
+                <br />
+
+                <div id="member-edit" data-model-name="MemberEditModel" style="display: none;">
+                    <fieldset>
+                        <legend>Member Edit</legend>
+                        <div id="member-form" action="#">
+                            <div style="display: none">
+                                <label>Id: </label>
+                                <input class="field" name="id" type="text" />
+                            </div>
+                            <div>
+                                <label class="field" >Email: </label>
+                                <input class="field" name="email" type="text" />
+                            </div>
+                            <div>
+                                <label style="width: 150px" name="confirmed_email_label">Confirmed Email: </label>
+                                <input class="field" name="confirmed_email" type="text" />
+                            </div>
+                            <div>
+                                <label class="field" >Password: </label>
+                                <input class="field" name="password" type="password" />
+                            </div>
+                            <div>
+                                <label class="field" name="confirmed_password_label">Confirmed Password: </label>
+                                <input class="field" name="confirmed_password" type="password" />
+                            </div>
+                            <div>
+                                <label class="field" >First Name: </label>
+                                <input class="field" name="first_name" type="text" />
+                            </div>
+                            <div>
+                                <label class="field" >Last Name: </label>
+                                <input class="field" name="last_name" type="text" />
+                            </div>
+                            <div>
+                                <label class="field" >Phone: </label>
+                                <input class="field" name="phone" type="text" />
+                            </div>
+                            <div>
+                                <label class="field" >Position: </label>
+                                <input class="field" name="position" type="text" />
+                            </div>
+                            <div>
+                                <button style="margin-left: 20px; width: 100px;" data-action="save" >
+                                    Save
+                                </button>
+                                <button style="margin-left: 20px; width: 100px;" data-action="cancelEdit" >
+                                    Cancel
+                                </button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+            <!--End Member-->
         </div>
-        <!--End Introduction-->
-
-
-        <!--Admin-->
-        <div id="admin-section" style="display: none;" data-controller="AdminController" >
-            <div id="admin-list" data-model-name="AdminSearchModel">
-                <fieldset>
-                    <legend>Admin Management</legend>
-                    <div>
-                        <label>Search: </label> <input name="name" data-action="search" />
-                    </div>
-                    <br/>
-
-                    <ol id="admin-table">
-                    </ol>
-                    <button data-action="first" >First</button>
-                    <button data-action="previous" >Previous</button>
-                    <span>Current Page: </span>
-                    <input id="page_index" style="width: 20px;" data-action="onPageIndexChanged" value="1" />
-                    / <span id="num_of_pages"></span> |
-                    <span>Page Size: </span>
-                    <select id="page_size" style="width: 40px;" data-action="onPageSizeChanged">
-                        <option>2</option>
-                        <option selected="selected">4</option>
-                        <option>6</option>
-                        <option>8</option>
-                        <option>10</option>
-                        <option>20</option>
-                    </select>
-                    <button data-action="next" >Next</button>
-                    <button data-action="last" >Last</button>
-                    <br/><br/>
-                    <button data-action="create" >New</button>
-                </fieldset>
-            </div>
-            <br />
-            <br />
-
-            <div id="admin-edit" style="display: none;" data-model-name="AdminEditModel">
-                <fieldset>
-                    <legend>Admin Edit</legend>
-                    <div id="admin-form" action="#">
-                        <div style="display: none">
-                            <label style="width: 140px;">Id: </label>
-                            <input class="field" name="id" type="text" />
-                        </div>
-                        <div>
-                            <label style="width: 140px;">Email: </label>
-                            <input class="field" name="email" type="text" />
-                        </div>
-                        <div>
-                            <label style="width: 140px;" name="confirmed_email_label">Confirmed Email: </label>
-                            <input class="field" name="confirmed_email" type="text" />
-                        </div>
-                        <div>
-                            <label style="width: 140px;">Password: </label>
-                            <input class="field" name="password" type="password" />
-                        </div>
-                        <div>
-                            <label style="width: 140px;" name="confirmed_password_label">Confirmed Password: </label>
-                            <input class="field" name="confirmed_password" type="password" />
-                        </div>
-                        <div>
-                            <label style="width: 140px;">First Name: </label>
-                            <input class="field" name="first_name" type="text" />
-                        </div>
-                        <div>
-                            <label style="width: 140px;">Last Name: </label>
-                            <input class="field" name="last_name" type="text" />
-                        </div>
-                        <div>
-                            <label style="width: 140px;">Phone: </label>
-                            <input class="field" name="phone" type="text" />
-                        </div>
-                        <div>
-                            <button style="margin-left: 20px; width: 100px;" data-action="save" >
-                                Save
-                            </button>
-                            <button style="margin-left: 20px; width: 100px;" data-action="cancelEdit" >
-                                Cancel
-                            </button>
-                        </div>
-                    </div>
-                </fieldset>
-            </div>
-        </div>
-        <!--End Admin-->
-
-
-        <!--Member-->
-        <div id="member-section" style="display: none;" data-controller="MemberController" >
-            <div id="member-list" data-model-name="MemberSearchModel">
-                <fieldset>
-                    <legend>Member Management</legend>
-                    <div>
-                        <label>Search: </label> <input name="name" data-action="search" />
-                    </div>
-                    <br/>
-
-                    <ol id="member-table">
-                    </ol>
-                    <button data-action="first" >First</button>
-                    <button data-action="previous" >Previous</button>
-                    <span>Current Page: </span>
-                    <input id="page_index" style="width: 20px;" data-action="onPageIndexChanged" value="1" />
-                    / <span id="num_of_pages"></span> |
-                    <span>Page Size: </span>
-                    <select id="page_size" style="width: 40px;" data-action="onPageSizeChanged">
-                        <option>2</option>
-                        <option selected="selected">4</option>
-                        <option>6</option>
-                        <option>8</option>
-                        <option>10</option>
-                        <option>20</option>
-                    </select>
-                    <button data-action="next" >Next</button>
-                    <button data-action="last" >Last</button>
-                    <br/><br/>
-                    <button data-action="create" >New</button>
-                </fieldset>
-            </div>
-            <br />
-            <br />
-
-            <div id="member-edit" data-model-name="MemberEditModel" style="display: none;">
-                <fieldset>
-                    <legend>Member Edit</legend>
-                    <div id="member-form" action="#">
-                        <div style="display: none">
-                            <label>Id: </label>
-                            <input class="field" name="id" type="text" />
-                        </div>
-                        <div>
-                            <label>Email: </label>
-                            <input class="field" name="email" type="text" />
-                        </div>
-                        <div>
-                            <label style="width: 140px;" name="confirmed_email_label">Confirmed Email: </label>
-                            <input class="field" name="confirmed_email" type="text" />
-                        </div>
-                        <div>
-                            <label style="width: 140px;">Password: </label>
-                            <input class="field" name="password" type="password" />
-                        </div>
-                        <div>
-                            <label style="width: 140px;" name="confirmed_password_label">Confirmed Password: </label>
-                            <input class="field" name="confirmed_password" type="password" />
-                        </div>
-                        <div>
-                            <label>First Name: </label>
-                            <input class="field" name="first_name" type="text" />
-                        </div>
-                        <div>
-                            <label>Last Name: </label>
-                            <input class="field" name="last_name" type="text" />
-                        </div>
-                        <div>
-                            <label>Phone: </label>
-                            <input class="field" name="phone" type="text" />
-                        </div>
-                        <div>
-                            <label>Position: </label>
-                            <input class="field" name="position" type="text" />
-                        </div>
-                        <div>
-                            <button style="margin-left: 20px; width: 100px;" data-action="save" >
-                                Save
-                            </button>
-                            <button style="margin-left: 20px; width: 100px;" data-action="cancelEdit" >
-                                Cancel
-                            </button>
-                        </div>
-                    </div>
-                </fieldset>
-            </div>
-        </div>
-        <!--End Member-->
     </div>
 
 </body>
