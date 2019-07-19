@@ -2,11 +2,12 @@
 <html  xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-    <title>TECH3S Simple Web Application</title>
+    <title>TECH3S Web Application Skeleton</title>
 
     <!--JS 3rd-party-->
     <script type="text/javascript" src="jquery_app/3rdparty/jquery-3.1.1.min.js"></script>
     <script type="text/javascript" src="jquery_app/3rdparty/sammy-0.7.6.min.js"></script>
+    <script type="text/javascript" src="jquery_app/3rdparty/simpleUpload.min.js"></script>
 
     <!--JS common-->
     <script type="text/javascript" src="jquery_app/common/AppFramework.js"></script>
@@ -39,7 +40,7 @@
         <button data-action="logout">Logout</button>
     </div>
 
-    <h1 align="center" style="color: blue; font-weight: bold; clear: both">TECH3S Simple Web Application</h1>
+    <h1 align="center" style="color: blue; font-weight: bold; clear: both">TECH3S Web Application Skeleton</h1>
 
     <!--Login section-->
     <div id="login" data-controller="SecurityController" data-model-name="LoginModel" style="margin: 0 auto">
@@ -59,7 +60,7 @@
     <!--Main content-->
     <div id="content" style="display: none;">
         <!--Menu-->
-        <div id="menu" style="float: left; width: 120px; height: 600px; border: solid 1px blue;">
+        <div id="menu" style="float: left; width: 120px; height: 666px; border: solid 1px blue;">
             <div id="menu-home">
                 <a href="#/">Home</a>
             </div>
@@ -76,8 +77,39 @@
         <!--Introduction-->
         <div id="menu-detail" style="margin-left: 123px">
             <div id="intro" style="display: none;">
-                <p>TECH3S Simple Web Application is built on SPA (Single Page Application) model.</p>
-                <p>Click on menu items to start....</p>
+                <p>TECH3S Web Application Skeleton is built on SPA (Single Page Application) model with the following technology stack:</p>
+                <ul>
+                    <li>
+                        <p><b>Backend:</b></p>
+                        <ol>
+                            <li>Spring REST</li>
+                            <li>Spring Security</li>
+                            <li>JWT (JSON Web Token)</li>
+                            <li>Spring-Hibernate</li>
+                            <li>MySQL</li>
+                        </ol>
+                    </li>
+                    <li>
+                        <p><b>Frontend:</b></p>
+                        <ol>
+                            <li>HTML (Hyper Text Markup Language)</li>
+                            <li>CSS (Cascading Style Sheet)</li>
+                            <li>Javascript</li>
+                            <li>jQuery</li>
+                            <li>Sammy</li>
+                        </ol>
+                    </li>
+                    <li>
+                        <p><b>DevOps:</b></p>
+                        <ol>
+                            <li>Apache Server</li>
+                            <li>Amazon Web Services (EC2, S3)</li>
+                            <li>Jenkins</li>
+                        </ol>
+                    </li>
+                </ul>
+
+                <p>Click on menu items on the left to start....</p>
             </div>
             <!--End Introduction-->
 
@@ -94,8 +126,8 @@
 
                         <ol id="admin-table">
                         </ol>
-                        <a href="#/admins" class="button" data-action="first" >First</a>
-                        <a href="#/admins" class="button" data-action="previous" >Previous</a>
+                        <button class="button" data-action="first" >First</button>
+                        <button class="button" data-action="previous" >Previous</button>
                         <span>Current Page: </span>
                         <input id="page_index" style="width: 20px;" data-action="onPageIndexChanged" value="1" />
                         / <span id="num_of_pages"></span> |
@@ -108,8 +140,8 @@
                             <option>10</option>
                             <option>20</option>
                         </select>
-                        <a href="#/admins" class="button" data-action="next" >Next</a>
-                        <a href="#/admins" class="button" data-action="last" >Last</a>
+                        <button class="button" data-action="next" >Next</button>
+                        <button class="button" data-action="last" >Last</button>
                         <br/><br/>
                         <button class="button" data-action="create" >New</button>
                     </fieldset>
@@ -169,6 +201,12 @@
                     <fieldset>
                         <legend>Member Management</legend>
                         <div>
+                            <label>Upload: </label> <input type="file" data-action="upload" />
+                            <p>Under development using simple upload jQuery plugin...</p>
+                        </div>
+                        <br/>
+
+                        <div>
                             <label>Search: </label> <input name="name" data-action="search" />
                         </div>
                         <br/>
@@ -189,8 +227,8 @@
                             <option>10</option>
                             <option>20</option>
                         </select>
-                        <a href="#/members" class="button" data-action="next" >Next</a>
-                        <a href="#/members" class="button" data-action="last" >Last</a>
+                        <button class="button" data-action="next" >Next</button>
+                        <button class="button" data-action="last" >Last</button>
                         <br/><br/>
                         <button class="button" data-action="create" >New</button>
                     </fieldset>
@@ -238,7 +276,7 @@
                                 <input class="field" name="position" type="text" />
                             </div>
                             <div>
-                                <a href="#/members" class="button" data-action="save" ></a>
+                                <a href="#/members" class="button" data-action="save" >Save</a>
                                 <a href="#/members" class="button" data-action="cancelEdit" >Cancel</a>
                             </div>
                         </div>

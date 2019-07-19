@@ -143,7 +143,7 @@ var MemberController = {
        NavigationUtil.goPrevious(this);
     },
 
-    save: function (event, $target) {       // update only, create by uploading csv file
+    save: function (event, $target) {
         var me = this;
 
         // 1. disable target
@@ -162,8 +162,14 @@ var MemberController = {
 //        }
         // 3. prepare post data for AJAX request
         var options = {};
-        options['url'] = this.baseUrl + model.id;
-        options['httpMethod'] = 'PUT';
+        if (model.id == '') {
+            options['url'] = this.baseUrl;
+            options['httpMethod'] = 'POST';
+        }
+        else {
+            options['url'] = this.baseUrl + model.id;
+            options['httpMethod'] = 'PUT';
+        }
         options['headers'] = Util.getSecurityTokenHeader();
         options['data'] = model,
         options['callback'] = function(result){

@@ -159,6 +159,7 @@ var AdminController = {
         var options = {};
         if (model.id == '') {
             options['url'] = this.baseUrl;
+            options['httpMethod'] = 'POST';
         }
         else {
             options['url'] = this.baseUrl + model.id;
