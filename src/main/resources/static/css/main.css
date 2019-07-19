@@ -2,20 +2,6 @@
     float: left;
 }
 
-#profile {
-    float: right;
-}
-
-#menu-left {
-    float: left;
-    border: 2px;
-    width: 200px;
-}
-
-#tab-pane {
-    margin-left: 200px;
-}
-
 fieldset {
     width: 98%;
 }
