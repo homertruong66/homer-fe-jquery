@@ -105,6 +105,9 @@ var AdminController = {
             // update UI paging components
             $('#page_index', me.$viewList).val(me.pagingModel.page_index);
             $('#num_of_pages', me.$viewList).text(me.pagingModel.num_of_pages);
+
+            // hide edit view if any
+            me.$viewEdit.hide();
         }
         RequestManager.doAjaxRequest(options);
     },

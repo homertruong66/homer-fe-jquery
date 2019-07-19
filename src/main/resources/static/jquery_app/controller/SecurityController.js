@@ -38,7 +38,10 @@ var SecurityController = {
 
                 // init routers
                 Starter.initApp();
-            }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert("Email or password is incorrect, please try again.")
+            },
         });
     },
 
