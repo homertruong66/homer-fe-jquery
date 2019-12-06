@@ -2,7 +2,7 @@
 <html  xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-    <title>TECH3S Web Application Skeleton</title>
+    <title>TECH3S Web Application Skeleton with jQuery and Sammy</title>
 
     <!--JS 3rd-party-->
     <script type="text/javascript" src="jquery_app/3rdparty/jquery-3.1.1.min.js"></script>
@@ -129,10 +129,10 @@
                         <button class="button" data-action="first" >First</button>
                         <button class="button" data-action="previous" >Previous</button>
                         <span>Current Page: </span>
-                        <input id="page_index" style="width: 20px;" data-action="onPageIndexChanged" value="1" />
-                        / <span id="num_of_pages"></span> |
+                        <input id="pageIndex" style="width: 20px;" data-action="onPageIndexChanged" value="1" />
+                        / <span id="numOfPages"></span> |
                         <span>Page Size: </span>
-                        <select id="page_size" style="width: 40px;" data-action="onPageSizeChanged">
+                        <select id="pageSize" style="width: 40px;" data-action="onPageSizeChanged">
                             <option>2</option>
                             <option selected="selected">4</option>
                             <option>6</option>
@@ -161,24 +161,24 @@
                                 <input class="field" name="email" type="text" />
                             </div>
                             <div>
-                                <label class="field" name="confirmed_email_label">Confirmed Email: </label>
-                                <input class="field" name="confirmed_email" type="text" />
+                                <label class="field" name="confirmedEmailLabel">Confirmed Email: </label>
+                                <input class="field" name="confirmedEmail" type="text" />
                             </div>
                             <div>
                                 <label class="field" >Password: </label>
                                 <input class="field" name="password" type="password" />
                             </div>
                             <div>
-                                <label class="field"  name="confirmed_password_label">Confirmed Password: </label>
-                                <input class="field" name="confirmed_password" type="password" />
+                                <label class="field"  name="confirmedPasswordLabel">Confirmed Password: </label>
+                                <input class="field" name="confirmedPassword" type="password" />
                             </div>
                             <div>
                                 <label class="field" >First Name: </label>
-                                <input class="field" name="first_name" type="text" />
+                                <input class="field" name="firstName" type="text" />
                             </div>
                             <div>
                                 <label class="field" >Last Name: </label>
-                                <input class="field" name="last_name" type="text" />
+                                <input class="field" name="lastName" type="text" />
                             </div>
                             <div>
                                 <label class="field" >Phone: </label>
@@ -216,10 +216,10 @@
                         <a href="#/members" class="button" data-action="first" >First</a>
                         <a href="#/members" class="button" data-action="previous" >Previous</a>
                         <span>Current Page: </span>
-                        <input id="page_index" style="width: 20px;" data-action="onPageIndexChanged" value="1" />
-                        / <span id="num_of_pages"></span> |
+                        <input id="pageIndex" style="width: 20px;" data-action="onPageIndexChanged" value="1" />
+                        / <span id="numOfPages"></span> |
                         <span>Page Size: </span>
-                        <select id="page_size" style="width: 40px;" data-action="onPageSizeChanged">
+                        <select id="pageSize" style="width: 40px;" data-action="onPageSizeChanged">
                             <option>2</option>
                             <option selected="selected">4</option>
                             <option>6</option>
@@ -248,24 +248,24 @@
                                 <input class="field" name="email" type="text" />
                             </div>
                             <div>
-                                <label style="width: 150px" name="confirmed_email_label">Confirmed Email: </label>
-                                <input class="field" name="confirmed_email" type="text" />
+                                <label style="width: 150px" name="confirmedEmailLabel">Confirmed Email: </label>
+                                <input class="field" name="confirmedEmail" type="text" />
                             </div>
                             <div>
                                 <label class="field" >Password: </label>
                                 <input class="field" name="password" type="password" />
                             </div>
                             <div>
-                                <label class="field" name="confirmed_password_label">Confirmed Password: </label>
-                                <input class="field" name="confirmed_password" type="password" />
+                                <label class="field" name="confirmedPasswordLabel">Confirmed Password: </label>
+                                <input class="field" name="confirmedPassword" type="password" />
                             </div>
                             <div>
                                 <label class="field" >First Name: </label>
-                                <input class="field" name="first_name" type="text" />
+                                <input class="field" name="firstName" type="text" />
                             </div>
                             <div>
                                 <label class="field" >Last Name: </label>
-                                <input class="field" name="last_name" type="text" />
+                                <input class="field" name="lastName" type="text" />
                             </div>
                             <div>
                                 <label class="field" >Phone: </label>

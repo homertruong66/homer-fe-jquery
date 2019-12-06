@@ -110,35 +110,35 @@ var DataUtil = {
 var NavigationUtil = {
 
     goFirst: function (controller) {
-        var pageIndex = $('#page_index', controller.$viewList).val();
+        var pageIndex = $('#pageIndex', controller.$viewList).val();
         if (pageIndex == 1) {
             return;
         }
 
         pageIndex = 1;
-        var pageSize = $('#page_size', controller.$viewList).val();
+        var pageSize = $('#pageSize', controller.$viewList).val();
         controller.get(pageIndex, pageSize);
     },
 
     goLast: function (controller) {
-        var pageIndex = $('#page_index', controller.$viewList).val();
-        if (pageIndex == controller.pagingModel.num_of_pages) {
+        var pageIndex = $('#pageIndex', controller.$viewList).val();
+        if (pageIndex == controller.pagingModel.numOfPages) {
             return;
         }
 
-        var pageIndex = controller.pagingModel.num_of_pages;
-        var pageSize = $('#page_size', controller.$viewList).val();
+        var pageIndex = controller.pagingModel.numOfPages;
+        var pageSize = $('#pageSize', controller.$viewList).val();
         controller.get(pageIndex, pageSize);
     },
 
     goNext: function (controller) {
-        var pageIndex = $('#page_index', controller.$viewList).val();
-        if (pageIndex == controller.pagingModel.num_of_pages) {
+        var pageIndex = $('#pageIndex', controller.$viewList).val();
+        if (pageIndex == controller.pagingModel.numOfPages) {
             return;
         }
 
         pageIndex++;
-        var pageSize = $('#page_size', controller.$viewList).val();
+        var pageSize = $('#pageSize', controller.$viewList).val();
         controller.get(pageIndex, pageSize);
     },
 
@@ -148,11 +148,11 @@ var NavigationUtil = {
         }
 
         var pageIndex = parseInt($target.val());
-        if (pageIndex < 1 || pageIndex > controller.pagingModel.num_of_pages) {
+        if (pageIndex < 1 || pageIndex > controller.pagingModel.numOfPages) {
             alert('Invalid page index')
             return;
         }
-        var pageSize = $('#page_size', controller.$viewList).val();
+        var pageSize = $('#pageSize', controller.$viewList).val();
         controller.get(pageIndex, pageSize);
     },
 
@@ -163,13 +163,13 @@ var NavigationUtil = {
     },
 
     goPrevious: function (controller) {
-        var pageIndex = $('#page_index', controller.$viewList).val();
+        var pageIndex = $('#pageIndex', controller.$viewList).val();
         if (pageIndex == 1) {
             return;
         }
 
         pageIndex--;
-        var pageSize = $('#page_size', controller.$viewList).val();
+        var pageSize = $('#pageSize', controller.$viewList).val();
         controller.get(pageIndex, pageSize);
     }
 

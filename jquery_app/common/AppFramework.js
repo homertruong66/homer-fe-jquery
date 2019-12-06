@@ -50,9 +50,9 @@ Date.prototype.format = function (type) {
   var rv;
   if (type == 1) {
     var today = new Date();
-    var today_utc = new Date(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate(),
+    var todayUtc = new Date(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate(),
 								 today.getUTCHours(), today.getUTCMinutes(), today.getUTCSeconds());
-    var diff = today_utc.toLocalDateTime() - this;
+    var diff = todayUtc.toLocalDateTime() - this;
     var rv = diff / 1000;   // second
     if (rv < 60) {
       rv = rv.toFixed(0) + ' second(s) ago';

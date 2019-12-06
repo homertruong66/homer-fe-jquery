@@ -3,11 +3,11 @@
     // Properties
     id: '',
     email		: '',
-    confirmed_email: '',
+    confirmedEmail: '',
     password	: '',
-    confirmed_password: '',
-    first_name		: '',
-    last_name	    : '',
+    confirmedPassword: '',
+    firstName		: '',
+    lastName	    : '',
     phone	    : '',
 
     // Methods

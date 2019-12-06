@@ -120,7 +120,7 @@ $(function() {
     }
 
     // register listener for member upload form
-    $("#member_upload_form").submit(function(){
+    $("#memberUploadForm").submit(function(){
         var formData = new FormData($(this)[0]);
         $.ajax({
             url: 'http://localhost:9090/v1/members/upload',

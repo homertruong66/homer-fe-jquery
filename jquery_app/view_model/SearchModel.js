@@ -4,13 +4,13 @@
 	criteria: {
 	},
 
-	custom_criteria: {
+	customCriteria: {
 	},
 
-	sort_name: 'id',
-	is_sort_asc: true,
-	page_index: 1,
-	page_size: 10,
+	sortName: 'id',
+	isSortAsc: true,
+	pageIndex: 1,
+	pageSize: 10,
 
 	// Methods
 	create: function () {

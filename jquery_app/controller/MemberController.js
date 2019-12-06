@@ -1,12 +1,12 @@
-var AdminController = {
+var MemberController = {
 
     // Properties
-    baseUrl: globalObject.apiUrl + '/v1/admins/',
+    baseUrl: globalObject.apiUrl + '/v1/members/',
     pagingModel: {},
-    viewMain: '#admin-section',
-    viewList: '#admin-list',
-    viewTable: '#admin-table',
-    viewEdit: '#admin-edit',
+    viewMain: '#member-section',
+    viewList: '#member-list',
+    viewTable: '#member-table',
+    viewEdit: '#member-edit',
 
     // Methods
     init: function () {
@@ -34,8 +34,8 @@ var AdminController = {
 
         // 4. do other stuffs
         $view.find('[disabled]').removeAttr('disabled');
-        $view.find('[name=confirmed_email_label], [name=confirmed_password_label],' +
-                   '[name=confirmed_email], [name=confirmed_password]').show();
+        $view.find('[name=confirmedEmailLabel], [name=confirmedPasswordLabel],' +
+                   '[name=confirmedEmail], [name=confirmedPassword]').show();
 
         // 5. show the view
         $view.show();
@@ -51,7 +51,7 @@ var AdminController = {
 
         var me = this;
         var options = {};
-        options['url'] = this.baseUrl + $target.data('id');
+        options['url'] = this.baseUrl + $target.data("id");
         options['httpMethod'] = 'DELETE',
         options['headers'] = Util.getSecurityTokenHeader();
         options['callback'] = function(result) {
@@ -69,17 +69,17 @@ var AdminController = {
         var me = this;
         var $view = this.$viewList;
         var searchModel = $view.createModel();
-        searchModel.custom_criteria["email"] = '%' + $('[name=name]', this.$viewList).val() + '%';
+        searchModel.customCriteria["email"] = '%' + $('[name=name]', this.$viewList).val() + '%';
 
         if (!pageIndex) {
-            pageIndex = $('#page_index', this.$viewList).val();
+            pageIndex = $('#pageIndex', this.$viewList).val();
         }
-        searchModel['page_index'] = pageIndex;
+        searchModel['pageIndex'] = pageIndex;
 
         if (!pageSize) {
-            pageSize = $('#page_size', this.$viewList).val();
+            pageSize = $('#pageSize', this.$viewList).val();
         }
-        searchModel['page_size'] = pageSize;
+        searchModel['pageSize'] = pageSize;
 
         // TODO: validate model
 
@@ -97,14 +97,13 @@ var AdminController = {
                 me.$viewTable.append(
                     '<li>' +
                         me.toString(item) +
-                        ' <a class="button" href="#/admins/' + item.id + '">Update</a> ' +
-                        ' <a class="button" data-action="del" data-id="' + item.id + '">Delete</a> ' +
+                        ' <a class="button" href="#/members/' + item.id + '">Update</a> ' +
                     '</li>');
             });
 
             // update UI paging components
-            $('#page_index', me.$viewList).val(me.pagingModel.page_index);
-            $('#num_of_pages', me.$viewList).text(me.pagingModel.num_of_pages);
+            $('#pageIndex', me.$viewList).val(me.pagingModel.pageIndex);
+            $('#numOfPages', me.$viewList).text(me.pagingModel.numOfPages);
 
             // hide edit view if any
             me.$viewEdit.hide();
@@ -117,6 +116,11 @@ var AdminController = {
         $.showSection(this, $view);
         $.updateSectionTitle($view);
         this.$viewEdit.hide();
+
+        // globalObject.currentView.hide();
+        // globalObject.currentView = this.$viewMain;
+        // globalObject.currentView.show();
+        // this.get();
     },
 
     last: function (event, $target) {
@@ -153,6 +157,7 @@ var AdminController = {
 //        }
         var model = $view.data('model');
         DataUtil.unbind($view, model);
+        model.feUrl = window.location.protocol + "//" + window.location.host
 //        if (model.validate(errors)) {
 //        }
         // 3. prepare post data for AJAX request
@@ -170,7 +175,7 @@ var AdminController = {
         options['callback'] = function(result){
             // 5. change view and do other stuffs
             $view.hide();
-            document.location.hash = '#/admins';
+            document.location.hash = '#/members';
 
             // 6. enable target
             $target.setEnabled(true);
@@ -188,13 +193,14 @@ var AdminController = {
             return;
         }
 
-        var pageIndex = $('#page_index', this.$viewList).val();
-        var pageSize = $('#page_size', this.$viewList).val();
+        var pageIndex = $('#pageIndex', this.$viewList).val();
+        var pageSize = $('#pageSize', this.$viewList).val();
         this.get(pageIndex, pageSize);
     },
 
     toString: function (item) {
-        return item.first_name + ' ' + item.last_name
+        return item.firstName + ' ' + item.lastName
+             + ' | ' + item.position
              + ' | ' + item.user.email
              + ' | ' + item.user.phone;
     },
@@ -218,33 +224,19 @@ var AdminController = {
 
             // 4. bind model to view
             DataUtil.bind($view, model);
-//            var $options = $('[name=roles] option', me.$viewEdit);
-//            $options.each(function(index, item) {
-//                var $item = $(item);
-//                var role = $item.val();
-//                if ($.inArray(role, entity.roles) != -1) {
-//                  $item.prop('selected', true);
-//                }
-//                else {
-//                  $item.prop('selected', false);
-//                }
-//            });
             // custom binding
             $('[name=email]', $view).val(model.user.email);
             $('[name=phone]', $view).val(model.user.phone);
 
-            // 5. do other stuffs
+            // 5. do other stuffs and show the view
             $view.find('[name=email], [name=password]').attr('disabled','disabled');
-            $view.find('[name=confirmed_email_label], [name=confirmed_password_label],' +
-                       '[name=confirmed_email], [name=confirmed_password]').hide();
+            $view.find('[name=confirmedEmailLabel], [name=confirmedPasswordLabel],' +
+                       '[name=confirmedEmail], [name=confirmedPassword]').hide();
             $view.show();
 
             // 6. enable target
         }
         RequestManager.doAjaxRequest(options);
-        if (!this.pagingModel.list) {
-            this.get();
-        }
     }
 
 }
